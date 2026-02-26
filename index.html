@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock del Local</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Página de Stocks del Local</h1>
+      <p>Demo inicial (escritorio) con guardado local y análisis de ventas.</p>
+    </header>
+
+    <main class="layout">
+      <aside id="suppliersPanel" class="suppliers-panel" aria-label="Proveedores"></aside>
+
+      <section class="content-panel">
+        <div class="top-bar">
+          <div class="clock-box">
+            <p><strong>Hora:</strong> <span id="clock">--:--:--</span></p>
+            <p><strong>Fecha:</strong> <span id="date">--/--/----</span></p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table id="stockTable">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Exhibido</th>
+                <th>Depósito</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="actions">
+          <button id="saveBtn" class="arrow-button" type="button">Enviar</button>
+          <p id="statusMsg" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <section class="analytics">
+      <h2>Análisis de ventas</h2>
+      <p>
+        Se toma como venta el faltante entre una carga y la siguiente del mismo producto.
+      </p>
+
+      <div class="filters">
+        <label>
+          Proveedor
+          <select id="analysisSupplier"></select>
+        </label>
+
+        <label>
+          Producto
+          <select id="analysisProduct"></select>
+        </label>
+
+        <label>
+          Período
+          <select id="analysisPeriod">
+            <option value="weekly">Semanal (7 días)</option>
+            <option value="biweekly">Quincenal (15 días)</option>
+            <option value="monthly" selected>Mensual (30 días)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="analytics-grid">
+        <article>
+          <h3>Promedio por producto</h3>
+          <table id="productAvgTable">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Proveedor</th>
+                <th>Promedio vendido</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </article>
+
+        <article>
+          <h3>Promedio por proveedor</h3>
+          <table id="providerAvgTable">
+            <thead>
+              <tr>
+                <th>Proveedor</th>
+                <th>Promedio vendido</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </article>
+      </div>
+
+      <article class="chart-section">
+        <h3>Gráfico de ventas</h3>
+        <canvas id="salesChart" height="120"></canvas>
+      </article>
+
+      <div class="reset-zone">
+        <button id="resetBtn" type="button" class="danger-btn">Eliminar todos los datos</button>
+      </div>
+    </section>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
